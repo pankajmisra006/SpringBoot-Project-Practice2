@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+ <meta charset="utf-8" />
+<script>
+
+window.addEventListener("message", (event)=>{
+
+        let txt=document.querySelector('#txtMsg111');
+        // event.data contains the message sent
+        txt.value=`Name is ${event.data.pName} Age is  ${event.data.pAge}` ;
+      
+    });
+
+
+function openChild() {
+childwin = window.open('http://localhost:8082/receiver','_blank');
+  
+}
+function sendMessage(){
+    let msg={pName : "Bob", pAge: "35"};
+    // In production, DO NOT use '*', use toe target domain
+    
+    childwin.parent.postMessage(msg,'*')
+    childwin.focus();
+}
+
+ 
+
+
+</script>
+</head>
+<body>
+    <form>
+        <fieldset>
+            <input type='button' id='btnopen' value='Open child' onclick='openChild();' />
+            <input type='button' id='btnSendMsg' value='Send Message' onclick='sendMessage();' />
+        </fieldset>
+        
+         <input type='text' id='txtMsg111' />
+    </form>
+</body>
+</html>
